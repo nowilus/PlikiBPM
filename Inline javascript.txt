@@ -1,0 +1,93 @@
+const view = this;
+const carInfos = view.getOption("carInfos").items;
+const taskList = view.getOption("taskList").items;
+const customerList = view.getOption("customerList").items;
+const sectionList = view.getOption("sectionList").items;
+const cardList = view.getOption("cardList").items;
+let role = view.getOption("role");
+let username = view.getOption("username");
+
+var domNode = document.createElement("div");
+view.context.element.appendChild(domNode);
+
+var globeDiv = document.createElement("div");
+globeDiv.classList.add('globe')
+view.context.element.appendChild(globeDiv);
+
+var blockedDiv = document.createElement("div");
+blockedDiv.classList.add('blockedDiv')
+view.context.element.appendChild(blockedDiv);
+
+var globe = document.getElementsByClassName("globe");
+var src = com_ibm_bpm_coach.getManagedAssetUrl("globe3.gif", com_ibm_bpm_coach.assetType_WEB);
+globe[0].style.background = 'url(' + src +' )';
+
+//carInfos.forEach(function (carInfo) {
+//	carInfo.backgroundImg = com_ibm_bpm_coach.getManagedAssetUrl(carInfo.backgroundImg, com_ibm_bpm_coach.assetType_WEB);
+//	carInfo.arrowDownImgSrc = com_ibm_bpm_coach.getManagedAssetUrl(carInfo.arrowDownImgSrc, com_ibm_bpm_coach.assetType_WEB);
+//});
+
+function updateDeal(data) {	
+	if(!taskList) {
+		taskList = [];
+	}
+    let boundData = taskList;    
+    boundData[boundData.length] = data;   
+    view.getOption("taskList").set("value", boundData);
+	  
+}
+
+function updateCustomer(data) {	
+	if(!customerList) {
+		customerList = [];
+	}
+    let boundData = customerList;    
+    boundData[boundData.length] = data;   
+    view.getOption("customerList").set("value", boundData);
+	  
+}
+function logoutPage() {	
+	view.context.options.role.set("value", '');
+	view.context.options.username.set("value", '');
+	runLoginPage();
+}
+
+var setLoginUser = function setLoginUser(roleInput, usernameInput) {
+	if(roleInput) {
+		view.context.options.role.set("value", roleInput);
+	}
+	if(usernameInput) {
+		view.context.options.username.set("value", usernameInput);
+	}	
+	if(roleInput != '' && usernameInput != '') {
+		runDashboard(roleInput , usernameInput);
+	} 
+}
+function runDashboard(roleInput, usernameInput) {
+	react_module.renderApp(
+	{
+		sectionInfoList: carInfos,
+		logo : com_ibm_bpm_coach.getManagedAssetUrl('logo.svg', com_ibm_bpm_coach.assetType_WEB),
+		user: com_ibm_bpm_coach.getManagedAssetUrl('user.jpg', com_ibm_bpm_coach.assetType_WEB),
+		taskList: taskList,
+		sectionList: sectionList,
+		cardList: cardList,
+		customerList: customerList,
+		userName: usernameInput,
+		userRole: roleInput,
+		taskListOnChange: updateDeal,
+		customerListOnChange: updateCustomer,
+		logout: logoutPage
+	},
+	  domNode
+	);
+}
+function runLoginPage() {
+	react_module.renderApp2(
+	{
+		logo : com_ibm_bpm_coach.getManagedAssetUrl('ibmLogo.png', com_ibm_bpm_coach.assetType_WEB),
+		loginUser : setLoginUser
+	},
+	  domNode
+	);
+}

@@ -1,0 +1,26 @@
+const view = this;
+const carInfos = view.getOption("carInfos").items;
+const taskList = view.getOption("taskList").items;
+const customerList = view.getOption("customerList").items;
+const sectionList = view.getOption("sectionList").items;
+const cardList = view.getOption("cardList").items;
+let role = view.getOption("role");
+let username = view.getOption("username");
+
+var domNode = document.createElement("div");
+view.context.element.appendChild(domNode);
+//
+//var globeDiv = document.createElement("div");
+//globeDiv.classList.add('globe')
+//view.context.element.appendChild(globeDiv);
+//
+//var blockedDiv = document.createElement("div");
+//blockedDiv.classList.add('blockedDiv')
+//view.context.element.appendChild(blockedDiv);
+
+var globe = document.getElementsByClassName("globe");
+var src = com_ibm_bpm_coach.getManagedAssetUrl("globe3.gif", com_ibm_bpm_coach.assetType_WEB);
+globe[0].style.background = 'url(' + src +' )';
+
+runLoginPage();
+
