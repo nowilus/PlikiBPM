@@ -1,0 +1,21 @@
+  const fetchUsers = (url) => {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(fetch(url, {
+          method: 'GET',
+        })
+          .then((response) => response.json()));
+      }, 3000)
+    });
+  
+    return promise;
+  }
+    const [fetching, setFetching] = useState(false);
+    const getData = () => {
+        setFetching(true);
+        fetchUsers("https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline")
+            .then((data) => {
+            console.log(data)
+            setFetching(false);
+        });
+    }
