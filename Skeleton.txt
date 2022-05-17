@@ -1,0 +1,21 @@
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false)
+      }, 8000); 
+    }, [])
+
+  return (    
+    <RecentOrdersContainer className="recentOrders" rows={rowsPerPage}>
+    {loading ? (
+    <>
+        <Skeleton
+            variant='rectangular'
+            animation="wave"
+            sx={{width: '925px', height:'520px', borderRadius: '20px', padding: '20px'}}
+        >       
+        </Skeleton>
+        <CircularProgress sx={{position: 'absolute', top: '180px', left: '382px' }} size={140} color='warning'></CircularProgress>
+    </> ) 
+    :
