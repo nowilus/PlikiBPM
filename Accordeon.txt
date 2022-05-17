@@ -1,0 +1,41 @@
+import React from 'react'
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material'
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { TableBody, TableCell, TableRow, TableHead, TableContainer, Table, Paper } from '@mui/material'
+
+const Accordeon = () => {
+  return (
+      <div>
+        <Accordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary id='panel1-header' aria-controls='panel1-content' expandIcon={<ExpandMoreIcon />}>
+                <Typography align='center'>Child customer</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Table aria-label='simple table' stickyHeader>
+                    <TableHead>
+                        <TableRow sx={{ 'th': {border: 0}}}>
+                            <TableCell>ID</TableCell>
+                            <TableCell>First name</TableCell>
+                            <TableCell>Last name</TableCell>
+                            <TableCell align='center'>Email</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow
+                        key='1'
+                        sx={{ '&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell>10020202</TableCell>    
+                            <TableCell>Łukasz</TableCell>    
+                            <TableCell>Nowakowski</TableCell>    
+                            <TableCell align='center'>nowakowskilukasznl@gmail.com</TableCell>    
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </AccordionDetails>
+        </Accordion>
+    </div>
+  )
+}
+
+export default Accordeon
