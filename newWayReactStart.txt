@@ -1,0 +1,27 @@
+/* eslint-disable import/no-amd */
+import r1 from "react";
+import { createRoot } from "react-dom/client";
+import App from "./components/App"
+import Login from "./components/Login";
+
+const React = r1;
+const App1 = App;
+const App2 = Login;
+const crRoot = createRoot;
+
+const a = document.querySelector("#app1");
+const domNode = document.createElement("div");
+a.appendChild(domNode);
+const root = crRoot(domNode);
+
+
+define([], () => {
+  return {
+    renderApp: function(props) {
+      root.render(<App1 {...props}/>);
+    },
+    renderApp2: function(props) {
+      root.render(<App2 {...props}/>);
+    }
+  };
+});
